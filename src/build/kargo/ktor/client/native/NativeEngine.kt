@@ -107,15 +107,22 @@ class NativeEngine(
                             slist = curl_slist_append(slist, "$name: $value")
                         }
                     }
-                    if (slist != null) {
-                        curl_easy_setopt(easyHandle, CURLOPT_HTTPHEADER, slist)
+                    // Include body Content-Type in headers (not set automatically by libcurl for raw posts)
+                    data.body.contentType?.let { ct ->
+                        slist = curl_slist_append(slist, "Content-Type: $ct")
                     }
-                    
+
                     val bodyBytes = data.body.toByteArray()
                     if (bodyBytes.isNotEmpty()) {
                         val cArray = allocArrayOf(bodyBytes)
-                        curl_easy_setopt(easyHandle, CURLOPT_POSTFIELDS, cArray)
-                        curl_easy_setopt(easyHandle, CURLOPT_POSTFIELDSIZE, bodyBytes.size.toLong())
+                        // IMPORTANT: set size BEFORE COPYPOSTFIELDS so libcurl treats data as raw bytes
+                        // and does NOT auto-set Content-Type: application/x-www-form-urlencoded
+                        curl_easy_setopt(easyHandle, CURLOPT_POSTFIELDSIZE_LARGE, bodyBytes.size.toLong())
+                        curl_easy_setopt(easyHandle, CURLOPT_COPYPOSTFIELDS, cArray)
+                    }
+
+                    if (slist != null) {
+                        curl_easy_setopt(easyHandle, CURLOPT_HTTPHEADER, slist)
                     }
                     
                     curl_easy_setopt(easyHandle, CURLOPT_WRITEFUNCTION, writeCallback)
