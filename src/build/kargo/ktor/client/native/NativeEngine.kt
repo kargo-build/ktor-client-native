@@ -222,6 +222,19 @@ class NativeEngine(
     private suspend fun OutgoingContent.toByteArray(): ByteArray = when (this) {
         is OutgoingContent.ByteArrayContent -> bytes()
         is OutgoingContent.ReadChannelContent -> readFrom().readRemaining().readByteArray()
+        is OutgoingContent.WriteChannelContent -> {
+            val channel = ByteChannel()
+            kotlinx.coroutines.coroutineScope {
+                launch {
+                    try {
+                        this@toByteArray.writeTo(channel)
+                    } finally {
+                        channel.close()
+                    }
+                }
+                channel.readRemaining().readByteArray()
+            }
+        }
         is OutgoingContent.NoContent -> ByteArray(0)
         else -> ByteArray(0)
     }
