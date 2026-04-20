@@ -4,10 +4,10 @@ product:
 
 dependencies:
   - co.touchlab:kermit:2.0.4
-  - io.ktor:ktor-client-core:3.3.0
-  - io.ktor:ktor-client-content-negotiation:3.3.0
-  - io.ktor:ktor-client-logging:3.3.0
-  - io.ktor:ktor-serialization-kotlinx-json:3.3.0
+  - io.ktor:ktor-client-core:3.4.1
+  - io.ktor:ktor-client-content-negotiation:3.4.1
+  - io.ktor:ktor-client-logging:3.4.1
+  - io.ktor:ktor-serialization-kotlinx-json:3.4.1
   - com.squareup.okio:okio:3.15.0
 
 test-dependencies:
