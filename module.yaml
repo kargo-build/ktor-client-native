@@ -1,10 +1,11 @@
 product:
   type: lib
-  platforms: [linuxX64]
+  platforms: [linuxX64, macosX64, macosArm64, mingwX64, jvm]
 
 dependencies:
   - co.touchlab:kermit:2.0.4
   - io.ktor:ktor-client-core:3.4.1
+  - io.ktor:ktor-client-cio:3.4.1
   - io.ktor:ktor-client-content-negotiation:3.4.1
   - io.ktor:ktor-client-logging:3.4.1
   - io.ktor:ktor-serialization-kotlinx-json:3.4.1
@@ -14,7 +15,12 @@ test-dependencies:
   - org.jetbrains.kotlin:kotlin-test:2.0.0
   - org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0
 
+# Linux Native specific: libcurl C-Interop (only needed for HTTPS support)
+
 settings:
+  kotlin:
+    freeCompilerArgs: [ -Xexpect-actual-classes ]
+settings@linuxX64:
   native:
     cinterop:
       libcurl:
