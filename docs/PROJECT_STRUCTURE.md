@@ -1,13 +1,13 @@
 # Project Structure
 
-This document explains the multiplatform structure of ktor-client-native.
+This document explains the multiplatform structure of ktor-client-hybrid.
 
 ## Directory Layout
 
 The project follows Amper's convention-based source set structure:
 
 ```
-ktor-client-native/
+ktor-client-hybrid/
 ├── src/                          # Common code (all platforms)
 │   └── build/kargo/ktor/client/native/
 │       ├── HybridEngine.kt       # expect declarations

@@ -1,6 +1,6 @@
 # Migration Guide
 
-This guide helps you migrate from other Ktor client engines to ktor-client-native.
+This guide helps you migrate from other Ktor client engines to ktor-client-hybrid.
 
 ## From CIO Engine
 

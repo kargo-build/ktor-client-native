@@ -1,6 +1,6 @@
 # Examples
 
-This directory contains working examples demonstrating how to use ktor-client-native.
+This directory contains working examples demonstrating how to use ktor-client-hybrid.
 
 ## Running Examples
 
