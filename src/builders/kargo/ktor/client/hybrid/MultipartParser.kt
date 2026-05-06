@@ -1,6 +1,4 @@
-package build.kargo.ktor.client.native
-
-import co.touchlab.kermit.Logger
+package builders.kargo.ktor.client.hybrid
 
 /**
  * A resilient multipart parser designed for Kotlin Native environments
